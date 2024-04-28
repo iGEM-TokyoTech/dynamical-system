@@ -2,15 +2,18 @@ import numpy as np
 
 
 class HenonMap:
-    def __init__(self, a: float, b: float):
+    def __init__(self, a: np.longdouble, b: np.longdouble):
         self._a = a
         self._b = b
 
-    def model(self, x: float, y: float):
+    def model(self, x: np.longdouble, y: np.longdouble):
         return (self._a - x * x + self._b * y, x)
 
-    def simulate(self, x_init: float, y_init: float, steps: int):
-        XY: np.ndarray = np.array([[x_init, y_init]])
+    def model_inverse(self, x: np.longdouble, y: np.longdouble):
+        return (y, (x + y * y - self._a) / self._b)
+
+    def simulate(self, x_init: np.longdouble, y_init: np.longdouble, steps: int):
+        XY: np.ndarray = np.array([[x_init, y_init]], dtype=np.longdouble)
         for _ in range(steps):
             x, y = self.model(XY[-1][0], XY[-1][1])
             XY = np.vstack([XY, [x, y]])
@@ -27,8 +30,9 @@ class HenonMap:
             [
                 [(tmp1 + tmp2) / tmp3, (tmp1 + tmp2) / tmp3],
                 [(tmp1 - tmp2) / tmp3, (tmp1 - tmp2) / tmp3],
-            ]
+            ],
+            dtype=np.longdouble,
         )
 
-    def jacob(self, x: float, y: float):
-        return np.array([[-2 * x, self._b], [1, 0]])
+    def jacob(self, x: np.longdouble, y: np.longdouble):
+        return np.array([[-2 * x, self._b], [1, 0]], dtype=np.longdouble)
