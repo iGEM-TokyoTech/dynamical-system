@@ -37,3 +37,6 @@ class DiscreteLogisticGrowth:
         y_model_map = self.model(x_range)
 
         return Web_x, Web_y, y_model_map, x_range
+
+    def fixed_points(self):
+        return list(set([0.0, (self._a - 1) / self._a]))
