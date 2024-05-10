@@ -15,3 +15,10 @@
 1. system_modeling.ipynb
 2. dynamical_system.ipynb
 3. logistic_growth.ipynb
+4. henon_map.ipynb
+
+## 番外編
+
+- fixed_point.ipynb
+- fixed_point_seq.ipynb
+- appendix
